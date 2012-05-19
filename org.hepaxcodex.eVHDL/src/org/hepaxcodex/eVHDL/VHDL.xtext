@@ -1,0 +1,32 @@
+grammar org.hepaxcodex.eVHDL.VHDL with org.eclipse.xtext.common.Terminals
+
+generate vHDL "http://www.hepaxcodex.org/eVHDL/VHDL"
+
+
+
+entity_declaration :
+	'entity' ID 'is'
+		entity_header
+//		entity_declarative_part
+//		(
+//			'begin'
+//			entity_statment_part
+//		)?
+		'end' //s('entity')? (entity_simple_name)?
+;
+
+
+
+)
+entity_header :
+	(formal_generic_clause)?
+	(formal_port_clause)?
+;
+
+generic_cluase :
+	'generic' '(' generic_list ')' ';'
+;
+
+port_clause :
+	'port' '(' port_list ')' ';'
+;
