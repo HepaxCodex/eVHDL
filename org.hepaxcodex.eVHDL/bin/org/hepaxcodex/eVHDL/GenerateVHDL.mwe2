@@ -5,7 +5,7 @@ import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
 var grammarURI = "classpath:/org/hepaxcodex/eVHDL/VHDL.xtext"
-var file.extensions = ".vhd .vhdl"
+var file.extensions = "vhd"
 var projectName = "org.hepaxcodex.eVHDL"
 var runtimeProject = "../${projectName}"
 

@@ -2,7 +2,9 @@ grammar org.hepaxcodex.eVHDL.VHDL with org.eclipse.xtext.common.Terminals
 
 generate vHDL "http://www.hepaxcodex.org/eVHDL/VHDL"
 
-
+vHDLPagckage:
+	elements += entity_declaration
+;
 
 entity_declaration :
 	'entity' ID 'is'
@@ -17,16 +19,25 @@ entity_declaration :
 
 
 
-)
+
 entity_header :
-	(formal_generic_clause)?
-	(formal_port_clause)?
+	(generic_clause)? // formal_generic_clause
+	(port_clause)?    // formal_port_clause
 ;
 
-generic_cluase :
+generic_clause :
 	'generic' '(' generic_list ')' ';'
 ;
 
 port_clause :
 	'port' '(' port_list ')' ';'
+;
+
+
+generic_list :
+	ID
+;
+
+port_list:
+	ID
 ;
