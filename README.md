@@ -36,9 +36,9 @@ Currently the plugin is in very early development stage.
 
 Goals:
 
-1) Parse entire VHDL Syntax
-2) Electric Text for standard templates
-3) Electric Text for Component Instances
+1. Parse entire VHDL Syntax
+2. Electric Text for standard templates
+3. Electric Text for Component Instances
 
 
 
