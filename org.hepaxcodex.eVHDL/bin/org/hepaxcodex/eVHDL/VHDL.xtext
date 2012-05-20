@@ -2,23 +2,20 @@ grammar org.hepaxcodex.eVHDL.VHDL with org.eclipse.xtext.common.Terminals
 
 generate vHDL "http://www.hepaxcodex.org/eVHDL/VHDL"
 
-vHDLPagckage:
+vHDLPagckage :
 	elements += entity_declaration
 ;
 
 entity_declaration :
 	'entity' ID 'is'
 		entity_header
-//		entity_declarative_part
-//		(
-//			'begin'
-//			entity_statment_part
-//		)?
+		entity_declarative_part
+		(
+			'begin'
+//			entity_statement_part
+		)?
 		'end' //s('entity')? (entity_simple_name)?
 ;
-
-
-
 
 entity_header :
 	(generic_clause)? // formal_generic_clause
@@ -26,18 +23,156 @@ entity_header :
 ;
 
 generic_clause :
-	'generic' '(' generic_list ')' ';'
+	'generic' '(' interface_list ')' ';' // generic_interface_list
 ;
 
 port_clause :
-	'port' '(' port_list ')' ';'
+	'port' '(' interface_list ')' ';' // port_interface_list
 ;
 
 
-generic_list :
+interface_list :
 	ID
 ;
 
-port_list:
+// The entity declarative part of a given entity declaration declares items
+// that are common to all design entities whose interfaces are defined by the
+// given entity declaration.
+entity_declarative_part :
+	(entity_declarative_item)*
+;
+
+
+
+// Names declared by declarative items in the entity declarative part of a 
+// given entity declaration are visible within the bodies of corresponding 
+// design entities, as well as within certain portions of a corresponding 
+// configuration declaration.
+entity_declarative_item : 
+ 	(
+ 		subprogram_declaration
+		| subprogram_body
+		| type_declaration
+		| subtype_declaration
+		| constant_declaration
+		| signal_declaration
+		| shared_variable_declaration 
+		| file_declaration
+		| alias_declaration
+		| attribute_declaration
+		| attribute_specification
+		| disconnection_specification 
+		| use_clause
+		| group_template_declaration 
+		| group_declaration
+	)
+;
+
+group_declaration:
 	ID
 ;
+
+
+group_template_declaration:
+	ID
+;
+
+
+disconnection_specification:
+	ID
+;
+
+
+use_clause:
+	ID
+;
+
+
+attribute_specification:
+	ID
+;
+
+
+attribute_declaration:
+	ID
+;
+
+
+alias_declaration:
+	ID
+;
+
+
+file_declaration:
+	ID
+;
+
+
+shared_variable_declaration:
+	ID
+;
+
+
+signal_declaration:
+	ID
+;
+
+
+constant_declaration:
+	ID
+;
+
+
+subtype_declaration:
+	ID
+;
+
+
+type_declaration:
+	ID
+;
+
+
+subprogram_body:
+	ID
+;
+
+
+subprogram_declaration:
+	ID
+;
+
+
+
+// The entity statement part contains concurrent statements that are common
+// to each design entity with this interface.
+entity_statement_part :
+	 entity_statement*
+;
+
+
+entity_statement : 
+	(
+		concurrent_assertion_statement
+		| passive_concurrent_procedure_call 
+		| passive_process_statement	
+	)
+;
+
+passive_process_statement:
+	ID
+;
+
+
+passive_concurrent_procedure_call:
+	ID
+;
+
+
+concurrent_assertion_statement:
+	ID
+;
+
+
+
+
